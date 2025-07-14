@@ -1,4 +1,3 @@
-
 .font-mono {
     font-family: 'Courier New', monospace;
 }
@@ -132,4 +131,21 @@ input:focus, select:focus {
 
 .text-shadow {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+body {
+    overflow-x: hidden;
+}
+
+@media (max-width: 640px) {
+    #prev-btn,
+    #next-btn {
+        width: 100% !important;
+        justify-content: center !important;
+    }
+
+    #sound-btn {
+        order: 99;
+        margin-top: 0.5rem;
+    }
 }
