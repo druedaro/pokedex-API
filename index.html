@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédex</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./styles/styles.css">
+</head>
+<body class="min-h-screen bg-red-600 p-4">
+    <div class="max-w-6xl mx-auto">
+        <div id="loading-screen" class="min-h-screen bg-red-600 flex items-center justify-center">
+            <div class="bg-gray-900 text-green-400 p-8 rounded-lg border-4 border-gray-700 font-mono">
+                <div class="text-center">
+                    <div class="text-2xl mb-4">POKÉDEX 1-4 GEN</div>
+                    <div class="text-lg">Inicializando...</div>
+                    <div class="mt-4 flex justify-center">
+                        <div class="w-8 h-8 border-2 border-green-400 border-t-transparent rounded-full animate-spin"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="pokedex-main" class="hidden">
+            <div class="bg-red-500 rounded-t-3xl p-6 border-8 border-red-700 shadow-2xl">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 bg-blue-400 rounded-full border-4 border-blue-600 shadow-inner flex items-center justify-center">
+                            <div class="w-8 h-8 bg-blue-200 rounded-full shadow-inner"></div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <div class="w-4 h-4 bg-red-400 rounded-full border-2 border-red-600"></div>
+                            <div class="w-4 h-4 bg-yellow-400 rounded-full border-2 border-yellow-600"></div>
+                            <div class="w-4 h-4 bg-green-400 rounded-full border-2 border-green-600"></div>
+                        </div>
+                    </div>
+                    <div class="text-white font-bold text-xl">POKÉDEX 1-4 GEN</div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="bg-black rounded-lg p-6 border-4 border-gray-800">
+                        <div class="bg-gray-900 rounded-lg p-4 border-2 border-gray-700 min-h-[400px]">
+                            <div id="left-screen" class="text-green-400 font-mono">
+                                <div class="text-center">
+                                    <div class="text-lg">SIN DATOS</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between items-center mt-4">
+                            <button
+                                id="prev-btn"
+                                class="bg-blue-500 hover:bg-blue-600 disabled:bg-gray-500 text-white px-4 py-2 rounded-lg border-2 border-blue-700 flex items-center space-x-2"
+                                disabled
+                            >
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                </svg>
+                                <span>ANTERIOR</span>
+                            </button>
+                            
+                            <div class="flex space-x-2">
+                                <button id="sound-btn" class="w-8 h-8 bg-gray-600 rounded-full border-2 border-gray-800 hover:bg-gray-500">
+                                    <svg class="w-4 h-4 mx-auto text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M9 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <button
+                                id="next-btn"
+                                class="bg-blue-500 hover:bg-blue-600 disabled:bg-gray-500 text-white px-4 py-2 rounded-lg border-2 border-blue-700 flex items-center space-x-2"
+                                disabled
+                            >
+                                <span>SIGUIENTE</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-black rounded-lg p-6 border-4 border-gray-800">
+                        <div class="bg-gray-900 rounded-lg p-4 border-2 border-gray-700 min-h-[400px]">
+                            <div id="right-screen" class="text-green-400 font-mono">
+                                <div class="text-center">
+                                    <div class="text-lg">SIN DATOS</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 space-y-2">
+                            <div class="flex space-x-2">
+                                <input
+                                    type="text"
+                                    id="search-input"
+                                    placeholder="BUSCAR..."
+                                    class="flex-1 bg-gray-800 text-green-400 px-3 py-2 rounded border border-green-400 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-green-400"
+                                />
+                                <button
+                                    id="list-btn"
+                                    class="bg-yellow-500 hover:bg-yellow-600 text-black px-4 py-2 rounded border-2 border-yellow-700 font-bold"
+                                >
+                                    LISTA
+                                </button>
+                            </div>
+                            
+                            <select
+                                id="type-filter"
+                                class="w-full bg-gray-800 text-green-400 px-3 py-2 rounded border border-green-400 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-green-400"
+                            >
+                                <option value="">TIPOS</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="pokemon-list" class="bg-red-500 rounded-b-3xl p-6 border-8 border-t-0 border-red-700 shadow-2xl hidden">
+                <div class="bg-black rounded-lg p-4 border-4 border-gray-800">
+                    <div class="bg-gray-900 rounded-lg p-4 border-2 border-gray-700 max-h-80 overflow-y-auto">
+                        <div class="text-green-400 font-mono">
+                            <div class="border-b border-green-400 pb-2 mb-4">
+                                <div class="text-lg font-bold">LISTA DE POKEMON</div>
+                                <div id="list-count" class="text-sm">0 ENTRADAS</div>
+                            </div>
+                            
+                            <div id="pokemon-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./scripts/types.js"></script>
+    <script src="./scripts/api.js"></script>
+    <script src="./scripts/ui.js"></script>
+    <script src="./scripts/main.js"></script>
+</body>
+</html>
